@@ -9,18 +9,18 @@ on:
 
 # Global environment variables
 env:
-  AWS_REGION: us-east-1           # 사용할 AWS 리전
-  ECR_REPOSITORY: helloapp        # ECR 리포지토리 이름
-  ECS_CLUSTER: bbs-frontend       # ECS 클러스터 이름
-  ECS_SERVICE: bbs-frontend-service       # ECS 서비스 이름
+  AWS_REGION: us-east-1 # 사용할 AWS 리전
+  ECR_REPOSITORY: helloapp # ECR 리포지토리 이름
+  ECS_CLUSTER: bbs-frontend # ECS 클러스터 이름
+  ECS_SERVICE: bbs-frontend-service # ECS 서비스 이름
   # Task Definition 이름을 “family” 또는 전체 ARN으로 설정
-  ECS_TASK_DEFINITION: bbs-frontend   # 기존에 등록된 Task Definition family name
-  CONTAINER_NAME: react        # Task Definition 내 컨테이너 이름
-  IMAGE_TAG: ${{ github.sha }}    # Docker 이미지 태그 (커밋 SHA)
+  ECS_TASK_DEFINITION: bbs-frontend # 기존에 등록된 Task Definition family name
+  CONTAINER_NAME: react # Task Definition 내 컨테이너 이름
+  IMAGE_TAG: ${{ github.sha }} # Docker 이미지 태그 (커밋 SHA)
 
 permissions:
-  contents: read                  # for actions/checkout
-  id-token: write                 # for OIDC
+  contents: read # for actions/checkout
+  id-token: write # for OIDC
 
 jobs:
   deploy:
@@ -34,7 +34,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubOIDCRole  # replace with your IAM Role ARN
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/githuboidc # replace with your IAM Role ARN
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
