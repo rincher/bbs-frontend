@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 interface Post {
   id: string;
@@ -10,8 +10,8 @@ interface Post {
 
 export default function App() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     fetchPosts();
@@ -19,10 +19,17 @@ export default function App() {
 
   async function fetchPosts() {
     try {
-      const res = await axios.get<Post[]>('http://localhost:3000/api/posts');
-      setPosts(res.data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+      const res = await axios.get<Post[]>(
+        "http://backend.hyundong.shop/api/posts"
+      );
+      setPosts(
+        res.data.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+      );
     } catch (err) {
-      console.error('Fetch error:', err);
+      console.error("Fetch error:", err);
     }
   }
 
@@ -31,12 +38,15 @@ export default function App() {
     if (!title || !content) return;
 
     try {
-      await axios.post<Post>('http://localhost:3000/api/posts', { title, content });
-      setTitle('');
-      setContent('');
+      await axios.post<Post>("http://backend.hyundong.shop/api/posts", {
+        title,
+        content,
+      });
+      setTitle("");
+      setContent("");
       fetchPosts();
     } catch (err) {
-      console.error('Submit error:', err);
+      console.error("Submit error:", err);
     }
   }
 
@@ -45,22 +55,31 @@ export default function App() {
       <div className="container mx-auto py-12 px-4">
         <div className="max-w-2xl mx-auto">
           <header className="text-center mb-12">
-            <h1 className="text-5xl font-extrabold text-gray-900 dark:text-white">BBS</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">A simple bulletin board</p>
+            <h1 className="text-5xl font-extrabold text-gray-900 dark:text-white">
+              BBS
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
+              A simple bulletin board
+            </p>
           </header>
 
           <main>
-            <form onSubmit={submitPost} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-12">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">New Post</h2>
+            <form
+              onSubmit={submitPost}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-12"
+            >
+              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                New Post
+              </h2>
               <input
                 value={title}
-                onChange={e => setTitle(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder="Title"
                 className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               />
               <textarea
                 value={content}
-                onChange={e => setContent(e.target.value)}
+                onChange={(e) => setContent(e.target.value)}
                 placeholder="Content"
                 className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md p-3 mb-4 h-32 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
                 rows={5}
@@ -74,13 +93,17 @@ export default function App() {
             </form>
 
             <div className="space-y-6">
-              {posts.map(post => (
+              {posts.map((post) => (
                 <div
                   key={post.id}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-transform transform hover:-translate-y-1"
                 >
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{post.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{post.content}</p>
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                    {post.content}
+                  </p>
                   <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">
                     {new Date(post.createdAt).toLocaleString()}
                   </div>
