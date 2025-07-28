@@ -5,7 +5,7 @@ name: Deploy React App to AWS ECS
 on:
   push:
     branches:
-      - main
+      - master
 
 # Global environment variables
 env:
