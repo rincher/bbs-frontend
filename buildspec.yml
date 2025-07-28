@@ -1,5 +1,9 @@
-
 version: 0.2
+env:
+  variables:
+    AWS_ACCOUNT_ID: "009215122583" # AWS 계정 ID
+    AWS_DEFAULT_REGION: "ap-northeast-2" # ECR이 위치한 리전 (예: 서울)
+    REPOSITORY_NAME: "bbs-frontend" # ECR 리포지토리 이름
 
 phases:
   pre_build:
