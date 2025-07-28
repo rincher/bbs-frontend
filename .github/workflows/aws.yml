@@ -10,7 +10,7 @@ on:
 # Global environment variables
 env:
   AWS_REGION: us-east-1 # 사용할 AWS 리전
-  ECR_REPOSITORY: helloapp # ECR 리포지토리 이름
+  ECR_REPOSITORY: bbs-frontend # ECR 리포지토리 이름
   ECS_CLUSTER: bbs-frontend # ECS 클러스터 이름
   ECS_SERVICE: bbs-frontend-service # ECS 서비스 이름
   # Task Definition 이름을 “family” 또는 전체 ARN으로 설정
