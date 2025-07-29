@@ -42,9 +42,7 @@ export default function App() {
         title,
         content,
       });
-      setTitle("");
-      setContent("");
-      fetchPosts();
+      window.location.reload();
     } catch (err) {
       console.error("Submit error:", err);
     }
