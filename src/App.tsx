@@ -19,9 +19,7 @@ export default function App() {
 
   async function fetchPosts() {
     try {
-      const res = await axios.get<Post[]>(
-        "http://backend.hyundong.shop/api/posts"
-      );
+      const res = await axios.get<Post[]>("http://backend.hyundong.shop/posts");
       setPosts(
         res.data.sort(
           (a, b) =>
@@ -38,7 +36,7 @@ export default function App() {
     if (!title || !content) return;
 
     try {
-      await axios.post<Post>("http://backend.hyundong.shop/api/posts", {
+      await axios.post<Post>("http://backend.hyundong.shop/posts", {
         title,
         content,
       });
